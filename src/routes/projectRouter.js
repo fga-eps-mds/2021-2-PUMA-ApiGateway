@@ -55,7 +55,7 @@ router.get('/palavra-chave', (req, res) => {
 });
 
 router.get('/subject', authentication.authenticateAny, (req, res) => {
-  projectController.getAllSubjects(req.body).then((response) => {
+  projectController.getSubjects(req.body).then((response) => {
     res.status(200).json(response.data);
   }).catch((error) => {
     res.status(400).json({ error });
