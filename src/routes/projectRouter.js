@@ -136,4 +136,29 @@ router.get('/subareas', (req, res) => {
   });
 });
 
+router.get('/professors', (req, res) => {
+  projectController.getProfessors().then((response) => {
+    res.status(200).json(response.data);
+  }).catch((error) => {
+    res.status(400).json({ error });
+  });
+});
+
+router.get('/subject/:subjectid', (req, res) => {
+  projectController.getSubject(parseInt(req.params.subjectid, 10)).then((response) => {
+    res.status(200).json(response.data);
+  }).catch((error) => {
+    res.status(400).json({ error });
+  });
+});
+
+router.put('/subject/:subjectid', (req, res) => {
+  projectController.updateSubject(parseInt(req.params.subjectid, 10), req.body).then((response) => {
+    res.status(200).json(response.data);
+  }).catch((error) => {
+    console.log(error);
+    res.status(400).json({ error });
+  });
+});
+
 module.exports = router;

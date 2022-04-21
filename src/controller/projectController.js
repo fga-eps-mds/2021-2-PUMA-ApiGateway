@@ -135,8 +135,35 @@ module.exports = {
   },
   deleteSubject: (subjectId) => {
     return new Promise((resolve, reject) => {
-      axios.delete(`${global.URL_PROJECT}/subject/${subjectId}`).then((response) => {
+      axios.delete(`${subjectUrl}/${subjectId}`).then((response) => {
         resolve(response.data);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  },
+  getProfessors: () => new Promise((resolve, reject) => {
+    const projectUrl = `${global.URL_PROJECT}/professors`;
+    axios.get(projectUrl).then((response) => {
+      resolve(response);
+    }).catch((error) => {
+      reject(error);
+    });
+  }),
+  getSubject: (subjectId) => new Promise((resolve, reject) => {
+    const projectUrl = `${subjectUrl}/${subjectId}`;
+    axios.get(projectUrl).then((response) => {
+      resolve(response);
+    }).catch((error) => {
+      reject(error);
+    });
+  }),
+  updateSubject: (subjectId, data) => {
+    const projectUrl = `${subjectUrl}/${subjectId}`;
+    const reqBody = data;
+    return new Promise((resolve, reject) => {
+      axios.put(projectUrl, reqBody).then((response) => {
+        resolve(response);
       }).catch((error) => {
         reject(error);
       });
