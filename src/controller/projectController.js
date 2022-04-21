@@ -4,7 +4,7 @@ const authentication = require('../utils/authentication');
 const projUrlgetAlocated = `${global.URL_PROJECT}/alocated/`;
 const projUrlgetProject = `${global.URL_PROJECT}/project/`;
 const projUrlputAlocated = `${global.URL_PROJECT}/alocated/status`;
-const projUrlgetAllSubjects = `${global.URL_PROJECT}/disciplina`;
+const subjectUrl = `${global.URL_PROJECT}/subject`;
 const projUrlputProposal = `${global.URL_PROJECT}/proposal/`;
 const projUrlputProposalStatus = `${global.URL_PROJECT}/alocate/`;
 const projUrlgetMyProposals = `${global.URL_PROJECT}/userProposals/`;
@@ -36,7 +36,7 @@ module.exports = {
     });
   }),
   getSubjects: () => new Promise((resolve, reject) => {
-    axios.get(projUrlgetAllSubjects).then((response) => {
+    axios.get(subjectUrl).then((response) => {
       resolve(response);
     }).catch((error) => {
       reject(error);
@@ -128,6 +128,15 @@ module.exports = {
     return new Promise((resolve, reject) => {
       axios.post(projectUrl, reqBody).then((response) => {
         resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  },
+  deleteSubject: (subjectId) => {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_PROJECT}/subject/${subjectId}`).then((response) => {
+        resolve(response.data);
       }).catch((error) => {
         reject(error);
       });
